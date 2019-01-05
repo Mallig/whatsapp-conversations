@@ -7,7 +7,7 @@ class Conversation
     has n, :messages
 end
 
-class Messages
+class Message
   include DataMapper::Resource
 
   property :id,           Serial
