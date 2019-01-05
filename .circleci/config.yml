@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/code
   docker:
-    - image: circleci/ruby:2.5.1-jessie-node
+    - image: circleci/ruby:2.5.3-node-browsers-legacy
 
 jobs:
   build:
