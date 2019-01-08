@@ -1,0 +1,1 @@
+web: ./startupscript.sh
