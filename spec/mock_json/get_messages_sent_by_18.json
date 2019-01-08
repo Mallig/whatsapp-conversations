@@ -1,0 +1,21 @@
+[
+  {
+      "id": 1,
+      "sender_id": 18,
+      "receiver_id": 13,
+      "content": "Alright mate, what's crackin'?"
+  },
+  {
+      "id": 7,
+      "sender_id": 18,
+      "receiver_id": 13,
+      "content": "Not a huge amount, you?"
+  },
+  {
+      "id": 9,
+      "sender_id": 18,
+      "receiver_id": 13,
+      "content": "Oh, cool - what did you see?"
+  }
+
+]

@@ -8,10 +8,6 @@ class MessagesController < Sinatra::Base
         content_type 'application/json'
     end
 
-    get '/messages' do
-        Message.all.to_json
-    end
-
     post '/messages' do
         message = JSON.parse(request.body.read)
         new_or_existing_message = Message.create(
@@ -36,6 +32,6 @@ class MessagesController < Sinatra::Base
     end
     
     get '/messages/:id' do
-        Message.first(:id => params[:id]).to_json
+        Message.all(:sender_id => params[:id]).to_json
     end
 end

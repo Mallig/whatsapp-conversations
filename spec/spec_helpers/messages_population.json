@@ -1,0 +1,57 @@
+[
+  {
+      "sender_id": 18,
+      "receiver_id": 13,
+      "content": "Alright mate, what's crackin'?"
+  },
+  {
+      "sender_id": 13,
+      "receiver_id": 18,
+      "content": "Not much how are you?"
+  },
+  {
+      "sender_id": 1,
+      "receiver_id": 2,
+      "content": "did you make the drop?"
+  },
+  {
+      "sender_id": 2,
+      "receiver_id": 1,
+      "content": "package is ready for collection"
+  },
+  {
+      "sender_id": 13,
+      "receiver_id": 18,
+      "content": "Been up to much recently?"
+  },
+  {
+      "sender_id": 1,
+      "receiver_id": 2,
+      "content": "good, delete our conversation history"
+  },
+  {
+      "sender_id": 18,
+      "receiver_id": 13,
+      "content": "Not a huge amount, you?"
+  },
+  {
+      "sender_id": 13,
+      "receiver_id": 18,
+      "content": "went to the cinema on thursday"
+  },
+  {
+      "sender_id": 18,
+      "receiver_id": 13,
+      "content": "Oh, cool - what did you see?"
+  },
+  {
+      "sender_id": 13,
+      "receiver_id": 18,
+      "content": "Avengers"
+  },
+  {
+      "sender_id": 13,
+      "receiver_id": 18,
+      "content": "was shit"
+  }
+]
