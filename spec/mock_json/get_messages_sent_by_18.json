@@ -16,6 +16,12 @@
       "sender_id": 18,
       "receiver_id": 13,
       "content": "Oh, cool - what did you see?"
+  },
+  {
+      "id": 12,
+      "receiver_id": 1,
+      "sender_id": 18,
+      "content": "want to go see avengers?"
   }
 
 ]

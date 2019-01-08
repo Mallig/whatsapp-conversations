@@ -7,4 +7,13 @@ class WhatsAppConversations < Sinatra::Base
     get "/" do
         "Hello World, from conversations API"
     end
+
+    get "/:user_id/:other_user_id" do
+        user_messages = Message.all(:sender_id => params[:user_id],
+                                    :receiver_id => params[:other_user_id])
+        other_user_messages = Message.all(:sender_id => params[:other_user_id],
+                                          :receiver_id => params[:user_id])
+        messages = user_messages + other_user_messages
+        messages.to_json
+    end
 end
