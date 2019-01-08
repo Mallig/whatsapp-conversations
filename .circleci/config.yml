@@ -2,6 +2,9 @@ defaults: &defaults
   working_directory: ~/code
   docker:
     - image: circleci/ruby:2.4.2-jessie-node
+      environment:
+        PGHOST: 127.0.0.1
+    -image: circleci/postgres:9.6-alpine
 
 jobs:
   build:
@@ -18,6 +21,40 @@ jobs:
             sudo apt-get update
             sudo apt-get install postgresql-server-dev-9.4
             bundle install
+      - save_cache:
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+  
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - gem-cache-{{ checksum "Gemfile.lock" }}
+            - gem-cache-
+      - run: 
+          name: Database Setup
+          command: |
+            sudo apt-get update
+            sudo apt-get install postgresql-server-dev-9.4
+            sudo apt-get install postgresql
+            bundle install
+            sudo service postgresql start
+            sudo psql -h localhost -U postgres -c "create database $DATABASE_NAME"
+          environment:
+            DATABASE_NAME: "whatsapp_conversations_test"
+      - run:
+          name: Run rspec in parallel
+          environment:
+            DATABASE_URL: "postgres://postgres@localhost/whatsapp_conversations_test"
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
       - save_cache:
           key: gem-cache-{{ checksum "Gemfile.lock" }}
           paths:
@@ -39,6 +76,13 @@ workflows:
   build_and_deploy:
     jobs:
     - build
-    - deploy:
+    - test:
         requires:
           - build
+    - deploy:
+        requires:
+          - test
+        filters:
+          branches:
+            only:
+              - master
