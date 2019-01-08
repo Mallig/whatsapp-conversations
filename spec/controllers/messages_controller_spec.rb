@@ -23,4 +23,16 @@ describe 'Messages Controller' do
       expect(JSON.parse(last_response.body)).to match @get_messages_sent_by_18
     end
   end
+
+  describe 'POST /messages' do
+    before(:each) do
+      @post_message = File.read('spec/mock_json/post_message.json')
+    end
+
+    it 'returns the message object from the database' do
+      post '/messages', @post_message, {"CONTENT_TYPE" => "application/json"}
+      @get_new_message = JSON.parse(Message.first(:content => 'this is a new message').to_json)
+      expect(JSON.parse(last_response.body)).to match @get_new_message
+    end
+  end
 end

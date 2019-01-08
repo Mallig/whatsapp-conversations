@@ -11,16 +11,13 @@ class MessagesController < Sinatra::Base
     post '/messages' do
         message = JSON.parse(request.body.read)
         new_or_existing_message = Message.create(
-            :sender => message["sender"],
-            :receiver => message["receiver"],
+            :sender_id => message["sender_id"],
+            :receiver_id => message["receiver_id"],
             :content => message["content"]
         )
         if new_or_existing_message.saved?
-            return {
-                :id => new_or_existing_message.id,
-                :content => new_or_existing_message.content
-            }.to_json
-        else
+            new_or_existing_message.to_json
+        else    
             {:saved => false}.to_json 
         end
     end
