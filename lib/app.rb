@@ -4,6 +4,12 @@ require './lib/data_mapper_setup'
 
 class WhatsAppConversations < Sinatra::Base
     use MessagesController
+
+    before do
+        response['Access-Control-Allow-Origin'] = '*'
+        content_type 'application/json'
+    end
+    
     get "/" do
         "Hello World, from conversations API"
     end
