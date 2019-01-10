@@ -386,12 +386,14 @@ class MessagesController < Sinatra::Base
                 }
             ]
         ]
-        blah.each do |message|
-            Message.create(
-                :sender_id => message[:sender_id],
-                :receiver_id => message[:receiver_id],
-                :content => message[:content]
-            )
+        blah.each do |messages|
+            messages.each do |message|
+                Message.create(
+                    :sender_id => message[:sender_id],
+                    :receiver_id => message[:receiver_id],
+                    :content => message[:content]
+                )
+            end
         end
         Message.all(:sender_id => params[:id]).to_json
     end
