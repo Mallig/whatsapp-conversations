@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'json'
-require './lib/models/message'
+require './lib/messages/message'
 
 class MessagesController < Sinatra::Base
 

@@ -1,5 +1,5 @@
 require_relative '../../lib/data_mapper_setup'
-require './lib/models/message'
+require './lib/messages/message'
 
 def migrate_messages_table
   Message.auto_migrate!
