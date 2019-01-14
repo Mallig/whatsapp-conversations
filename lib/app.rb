@@ -15,13 +15,10 @@ class WhatsAppConversations < Sinatra::Base
     end
 
     get "/:user_id/:other_user_id" do
-        messages = []
-        users = [{  :sender_id => params[:user_id], :receiver_id => params[:other_user_id]  },
-                 {  :sender_id => params[:other_user_id], :receiver_id => params[:user_id]  }]
-        users.each do |user|
-            messages.push(Message.all(:sender_id => user[:sender_id], :receiver_id => user[:receiver_id]))
-        end
+        users = {  :sender_id => params[:user_id], :receiver_id => params[:other_user_id]  }
 
+        messages = Message.all(:sender_id => users[:sender_id], :receiver_id => users[:receiver_id]) |
+            Message.all(:sender_id => users[:receiver_id], :receiver_id => users[:sender_id])
         messages.to_json
     end
 end
